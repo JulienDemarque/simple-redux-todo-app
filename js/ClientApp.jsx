@@ -1,16 +1,23 @@
 import React from "react";
 import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-const App = function() {
-  return (
-    <div className="app">
-      <h1>Hello World</h1>
-      <h3>
-        Welcome to my React boilerplate <br /> with webpack, webpack-dev-server,
-        babel, eslint, prettier
-      </h3>
-    </div>
-  );
-};
+import rootReducer from "./reducers/root-reducer";
+
+import Container from "./containers/Container";
+
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
+
+const App = () => (
+  <Provider store={store}>
+    <Container />
+  </Provider>
+);
 
 render(<App />, document.getElementById("app"));
