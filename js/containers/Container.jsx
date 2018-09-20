@@ -11,6 +11,7 @@ class Container extends React.Component {
     super(props);
     this.state = { input: "" };
     this.handleChange = this.handleChange.bind(this);
+    this.saveTodo = this.saveTodo.bind(this);
   }
 
   handleChange(e) {
@@ -18,7 +19,7 @@ class Container extends React.Component {
   }
 
   saveTodo() {
-    this.props.addTodo(this.state.input);
+    this.props.onAddTodo(this.state.input);
   }
 
   render() {
@@ -39,13 +40,13 @@ class Container extends React.Component {
 
 Container.propTypes = {
   todoList: PropTypes.instanceOf(Array).isRequired,
-  addTodo: PropTypes.func.isRequired
+  onAddTodo: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({ todoList: state.todoList });
 
 const mapDispatchToProps = dispatch => ({
-  addTodo: todo => {
+  onAddTodo: todo => {
     dispatch(addTodo(todo));
   }
 });
